@@ -39,6 +39,8 @@ The API uses basic authentication with a static username and password (user:pass
    cd fintech-api
 
 2.	Install the dependencies:
+    If you cloned with the node_modules and package-lock.json, you can either choose to skip the installation or delete them before installing the dependencies 
+
     ```sh
     npm install
 
