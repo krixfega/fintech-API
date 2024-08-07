@@ -35,8 +35,8 @@ The API uses basic authentication with a static username and password (user:pass
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/financial-transaction-api.git
-   cd financial-transaction-api
+   git clone https://github.com/krixfega/fintech-API.git
+   cd fintech-api
 
 2.	Install the dependencies:
     ```sh
@@ -50,7 +50,7 @@ The API uses basic authentication with a static username and password (user:pass
     
 4. Start the server:
     ```sh
-    npmrun dev
+    npm run dev
 
 The server will start on the port specified in the .env file (default is 5001).
 
