@@ -1,4 +1,4 @@
-const Transaction = require('../models/transactionModel');
+const transactionRepository = require('../repositories/transactionRepository');
 
 const createTransaction = async (req, res) => {
   try {
@@ -8,9 +8,7 @@ const createTransaction = async (req, res) => {
       return res.status(400).json({ message: 'Amount must be a positive number' });
     }
 
-    const transaction = new Transaction({ amount, type, description });
-    await transaction.save();
-
+    const transaction = await transactionRepository.create({ amount, type, description });
     res.status(201).json(transaction);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -20,7 +18,7 @@ const createTransaction = async (req, res) => {
 const getTransactionById = async (req, res) => {
   try {
     const { id } = req.params;
-    const transaction = await Transaction.findOne({ id });
+    const transaction = await transactionRepository.findById(id);
 
     if (!transaction) {
       return res.status(404).json({ message: 'Transaction not found' });
@@ -34,21 +32,11 @@ const getTransactionById = async (req, res) => {
 
 const listTransactions = async (req, res) => {
   try {
-    const { type, startDate, endDate, page = 1, limit = 10 } = req.query;
-    const query = {};
+    const { type, startDate, endDate, page, limit } = req.query;
+    const filters = { type, startDate, endDate };
+    const pagination = { page, limit };
 
-    if (type) {
-      query.type = type;
-    }
-
-    if (startDate && endDate) {
-      query.date = { $gte: new Date(startDate), $lte: new Date(endDate) };
-    }
-
-    const transactions = await Transaction.find(query)
-      .skip((page - 1) * limit)
-      .limit(parseInt(limit));
-
+    const transactions = await transactionRepository.findAll(filters, pagination);
     res.status(200).json(transactions);
   } catch (error) {
     res.status(500).json({ message: error.message });
