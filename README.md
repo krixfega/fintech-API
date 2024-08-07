@@ -22,7 +22,7 @@ The Simple Financial Transaction API provides endpoints to manage financial tran
 
 ### Security
 
-The API uses basic authentication with a static username and password to secure endpoints, ensuring only authenticated users can access them.
+The API uses basic authentication with a static username and password (user:password) to secure endpoints, ensuring only authenticated users can access them.
 
 ## Setup Instructions
 
@@ -52,7 +52,7 @@ The API uses basic authentication with a static username and password to secure 
     ```sh
     npmrun dev
 
-    The server will start on the port specified in the .env file (default is 5001).
+The server will start on the port specified in the .env file (default is 5001).
 
 API Documentation
 
@@ -67,10 +67,10 @@ How to Run Tests
 
 The project includes a test suite to verify the functionality of the API endpoints. The tests use Jest and Supertest for testing.
 
-	1.	Ensure MongoDB is running.
-	2.	Run the tests:
+1.	Ensure MongoDB is running.
+2.	Run the tests:
 
     ```sh
     npm test
 
-    The test suite will create and delete transactions, retrieve transactions by ID, list all transactions, and filter transactions by type and date range.
+The test suite will create and delete transactions, retrieve transactions by ID, list all transactions, and filter transactions by type and date range.
